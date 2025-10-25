@@ -17,10 +17,21 @@ const PORT = process.env.PORT || 3001;
 app.use(helmet());
 
 // Configuration CORS pour permettre les requêtes depuis le frontend Vue
+// Configurer les origines autorisées via la variable d'environnement CLIENT_ORIGIN.
+// Exemple: CLIENT_ORIGIN=https://mon-frontend.firebaseapp.com,https://mon-domaine.com
+const allowedOrigins = process.env.CLIENT_ORIGIN
+  ? process.env.CLIENT_ORIGIN.split(',').map(o => o.trim()).filter(Boolean)
+  : (process.env.NODE_ENV === 'production'
+    ? ['https://api-server.lassus-xavier.workers.dev']
+    : ['http://localhost:3000', 'http://127.0.0.1:3000']);
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://votre-domaine.com'] 
-    : ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  origin: (incomingOrigin, callback) => {
+    // Allow requests with no origin (e.g., mobile apps, curl, server-to-server)
+    if (!incomingOrigin) return callback(null, true);
+    if (allowedOrigins.includes(incomingOrigin)) return callback(null, true);
+    return callback(new Error(`Origine non autorisée: ${incomingOrigin}`), false);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization']
