@@ -1,0 +1,5 @@
+{
+  "name": "api-server-worker",
+  "main": "server.js",
+  "compatibility_date": "2025-10-25"
+}
