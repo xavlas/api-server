@@ -255,12 +255,12 @@ Vous pouvez tester l'API avec curl, Postman, ou tout autre client HTTP :
 
 ```bash
 # Test de connexion
-curl -X POST http://localhost:3001/api/auth/login \
+curl -X POST https://6c79d18c-api-server.lassus-xavier.workers.dev/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@example.com","password":"password"}'
 
 # Test du profil (avec token)
-curl -X GET http://localhost:3001/api/user/profile \
+curl -X GET https://6c79d18c-api-server.lassus-xavier.workers.dev/api/auth/user/profile \
   -H "Authorization: Bearer YOUR_TOKEN_HERE"
 ```
 
