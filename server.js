@@ -19,7 +19,7 @@ app.use(helmet());
 // Configuration CORS pour permettre les requêtes depuis le frontend Vue
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' 
-    ? ['https://6c79d18c-api-server.lassus-xavier.workers.dev'] 
+    ? ['https://api-server.lassus-xavier.workers.dev'] 
     : ['http://localhost:3000', 'http://127.0.0.1:3001'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],

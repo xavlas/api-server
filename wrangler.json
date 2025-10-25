@@ -1,6 +1,5 @@
 {
   "name": "api-server",
   "main": "server.js",
-  "compatibility_date": "2025-10-25",
-  "compatibility_flags": ["nodejs_compat"]
+  "compatibility_date": "2025-10-25"
 }
